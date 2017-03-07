@@ -1,0 +1,6 @@
+Measurements taken in (mm) and gauss (G)
+
+Start Place:
+
+x,y,gauss
+0,0,
