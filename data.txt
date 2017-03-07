@@ -2,6 +2,7 @@ Measurements taken in (mm) and gauss (G)
 
 Start Place:
 from top:left outside corner, positive is to the right and towards the interior
+x is sideways, y is vertical (interior to exterior)
 Arrangment A, white thingy, 4mm thick
 x,y,gauss
 0,0,900
@@ -227,3 +228,48 @@ x,y,gauss
 30,-60,17
 30,-70,12
 20,-80,9
+0,20,1100
+0,30,210
+0,40,160
+0,50,150
+0,60,150
+0,70,150
+0,80,140
+-20,20,200
+-30,20,100
+-40,20,70
+-50,20,50
+-60,20,30
+-70,20,20
+-80,20,15
+10,20,1500
+10,30,260
+10,40,160
+10,50,160
+10,60,160
+10,70,170
+10,80,170
+20,20,1100
+20,30,255
+20,40,170
+20,50,150
+20,60,145
+20,70,144
+20,80,142
+30,20,300
+30,30,180
+30,40,140
+30,50,125
+30,60,130
+30,70,127
+30,80,130
+40,20,130
+50,20,80
+60,20,50
+70,20,40
+80,20,30
+90,20,18
+100,20,12
+
+Part B: Red thing 3mm
+x is towards the center
