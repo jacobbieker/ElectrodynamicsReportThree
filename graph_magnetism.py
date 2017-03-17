@@ -27,6 +27,8 @@ with open("just_data.txt", "r") as source:
 
 # Now display a heat map of the whole things
 # Try to find how large the magnet would be in the photo, or the bars
+# Magnet is apparently 25mm on a side, so can make a block out of that
+# But size doesnt matter apparently, see how it goes, don't have a value for the size of the iron yokes
 
 # Part A results
 x, y, gauss = zip(*data_set_one)
@@ -40,6 +42,34 @@ plt.show()
 
 # Part B results
 x, y, gauss = zip(*data_set_two)
+eatmap, xedges, yedges = np.histogram2d(x, y, weights=gauss, bins=100)
+extent = [xedges[0], xedges[-1], yedges[0], yedges[-1]]
+
+plt.clf()
+plt.imshow(heatmap.T, extent=extent, origin='lower')
+plt.title("Part B")
+plt.show()
+
+
+# Part C results
+x, y, gauss = zip(*data_set_three)
+eatmap, xedges, yedges = np.histogram2d(x, y, weights=gauss, bins=100)
+extent = [xedges[0], xedges[-1], yedges[0], yedges[-1]]
+
+plt.clf()
+plt.imshow(heatmap.T, extent=extent, origin='lower')
+plt.title("Part C")
+plt.show()
+
+# Part C Differences results
+x, y, gauss = zip(*data_set_two)
+x1, y1, gauss1 = zip(*data_set_three)
+
+# Get differences in field strength for these values
+x = abs(x) - abs(x1)
+y = abs(y) - abs(y1)
+gauss = abs(gauss) - abs(gauss1)
+
 eatmap, xedges, yedges = np.histogram2d(x, y, weights=gauss, bins=100)
 extent = [xedges[0], xedges[-1], yedges[0], yedges[-1]]
 
