@@ -1,6 +1,7 @@
 import os, csv
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.patches import Rectangle
 
 data_set_one = []
 data_set_two = []
@@ -41,6 +42,8 @@ plt.imshow(heatmap.T, extent=extent, origin='lower')
 plt.title("Part A: 4mm thick gap")
 plt.xlabel("X position (mm)")
 plt.ylabel("Y position (mm)")
+currentAxis = plt.gca()
+currentAxis.add_patch(Rectangle((0, 0), 26, 26, facecolor="none"))
 plt.show()
 
 # Part B results
@@ -53,6 +56,8 @@ plt.imshow(heatmap.T, extent=extent, origin='lower')
 plt.title("Part B: 4mm thick gap")
 plt.xlabel("X position (mm)")
 plt.ylabel("Y position (mm)")
+currentAxis = plt.gca()
+currentAxis.add_patch(Rectangle((0, 0), 26, 26, facecolor="none"))
 plt.show()
 
 
@@ -66,6 +71,8 @@ plt.imshow(heatmap.T, extent=extent, origin='lower')
 plt.title("Part C: 2mm thick gap")
 plt.xlabel("X position (mm)")
 plt.ylabel("Y position (mm)")
+currentAxis = plt.gca()
+currentAxis.add_patch(Rectangle((0, 0), 26, 26, facecolor="none"))
 plt.show()
 
 # Part C Differences results
@@ -86,3 +93,10 @@ plt.imshow(heatmap.T, extent=extent, origin='lower')
 plt.title("Part B")
 plt.show()
 """
+
+# Getting B(m)
+u0 = 4.*np.pi*(10**(-7))
+def B_m(lg,lm,lk,hm):
+    top = -1*lm*hm*u0
+    bottom = lg*lk
+    return top/bottom
