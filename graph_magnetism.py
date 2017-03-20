@@ -125,7 +125,7 @@ sorted_data_two = sorted(data_set_two,key=itemgetter(0,1))
 sorted_data_three = sorted(data_set_three,key=itemgetter(0,1))
 
 x_1, y_1, gauss1 = zip(*sorted_data_one)
-x2, y2, gauss2 = zip(*sorted_data_two)
+x_2, y_2, gauss2 = zip(*sorted_data_two)
 x3, y3, gauss3 = zip(*sorted_data_three)
 
 gauss1 = np.asarray(gauss1)
@@ -150,6 +150,7 @@ print(y1)
 print(x1)
 for element in sorted_data_one:
     one_array[int(element[0]), int(element[1])] = element[2]
+    print(one_array[int(element[0])])
 x_list = []
 y_list = []
 for index in range(0,int(max(x1))):
@@ -157,4 +158,58 @@ for index in range(0,int(max(x1))):
 for index in range(0,int(max(y1))):
     y_list.append(index)
 
-print(interpolate.RectBivariateSpline(x_list, y_list, one_array))
+x1_spline = interpolate.RectBivariateSpline(x_list, y_list, one_array)
+print(one_array)
+
+x2 = []
+y2 = []
+for index, element in enumerate(x_2):
+    print(element)
+    x2.append(element + abs(min(x_2)))
+
+for index, element in enumerate(y_2):
+    y2.append(element + abs(min(y_2)))
+
+# Redoing it my way
+
+two_array = np.empty([int(max(x2)), int(max(y2))])
+two_array[:] = np.NAN
+print(two_array)
+print(y2)
+print(x2)
+for element in sorted_data_two:
+    two_array[int(element[0]), int(element[1])] = element[2]
+x_list2 = []
+y_list2 = []
+for index in range(0,int(max(x2))):
+    x_list2.append(index)
+for index in range(0,int(max(y2))):
+    y_list2.append(index)
+
+x2_spline = interpolate.RectBivariateSpline(x_list2, y_list2, two_array)
+
+
+print(x1_spline.integral(0.,max(x1),0.,max(y1)))
+
+print(x2_spline.integral(0.,max(x2),0.,max(y2)))
+
+print(x1_spline(x_list, y_list))
+
+print(x1_spline.get_coeffs())
+
+
+
+#mask invalid values
+array = np.ma.masked_invalid(two_array)
+xx, yy = np.meshgrid(x_list2, y_list2)
+#get only the valid values
+x1 = xx[~array.mask]
+y1 = yy[~array.mask]
+newarr = array[~array.mask]
+
+GD1 = interpolate.griddata((x1, y1), newarr.ravel(),
+                          (xx, yy),
+                             method='cubic')
+print(GD1)
+plt.imshow(GD1,interpolation='nearest')
+plt.show()
