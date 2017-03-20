@@ -96,7 +96,13 @@ plt.show()
 
 # Getting B(m)
 u0 = 4.*np.pi*(10**(-7))
+l_m = 25.*2
+l_g = 4.
+l_k = 1.*4
+
 def B_m(lg,lm,lk,hm):
+    # Gets B(m) from measured values?
     top = -1*lm*hm*u0
     bottom = lg*lk
     return top/bottom
+
