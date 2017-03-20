@@ -197,11 +197,9 @@ print(x1_spline(x_list, y_list))
 
 print(x1_spline.get_coeffs())
 
-
-
 #mask invalid values
-array = np.ma.masked_invalid(two_array)
-xx, yy = np.meshgrid(x_list2, y_list2)
+array = np.ma.masked_invalid(one_array)
+xx, yy = np.meshgrid(x_list, y_list)
 #get only the valid values
 x1 = xx[~array.mask]
 y1 = yy[~array.mask]
@@ -213,3 +211,24 @@ GD1 = interpolate.griddata((x1, y1), newarr.ravel(),
 print(GD1)
 plt.imshow(GD1,interpolation='nearest')
 plt.show()
+
+#mask invalid values
+array = np.ma.masked_invalid(two_array)
+xx, yy = np.meshgrid(y_list2, x_list2)
+#get only the valid values
+x1 = xx[~array.mask]
+y1 = yy[~array.mask]
+newarr = array[~array.mask]
+
+GD2 = interpolate.griddata((x1, y1), newarr.ravel(),
+                          (xx, yy),
+                             method='cubic')
+print(GD2)
+plt.imshow(GD2,interpolation='nearest')
+plt.show()
+
+total_b = np.nansum(GD2)
+total_a = np.nansum(GD1)
+
+print(total_a)
+print(total_b)
