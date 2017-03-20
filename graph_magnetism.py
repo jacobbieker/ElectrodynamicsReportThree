@@ -2,6 +2,7 @@ import os, csv
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.patches import Rectangle
+from operator import itemgetter
 
 data_set_one = []
 data_set_two = []
@@ -10,7 +11,6 @@ data_set_three = []
 with open("just_data.txt", "r") as source:
     setup = 0
     for line in source:
-        print(line)
         if line != "NEW\n":
             parts = line.split(",")
             x = float(parts[0])
@@ -106,3 +106,55 @@ def B_m(lg,lm,lk,hm):
     bottom = lg*lk
     return top/bottom
 
+# Integration though doing flux * area from the measurements
+# Part A first, each value corresponds to a 5x5mm section. So no interpolation at the moment, might try later
+total_a = 0
+for value in data_set_one:
+    total_a += value[2]*25 #mm^2
+print(total_a)
+# B is 10x10mm, so 100mm^2
+total_b = 0
+for value in data_set_two:
+    total_b += value[2]*100 #mm^2
+print(total_b)
+
+from scipy import interpolate
+
+sorted_data_one = sorted(data_set_one,key=itemgetter(0,1))
+sorted_data_two = sorted(data_set_two,key=itemgetter(0,1))
+sorted_data_three = sorted(data_set_three,key=itemgetter(0,1))
+
+x_1, y_1, gauss1 = zip(*sorted_data_one)
+x2, y2, gauss2 = zip(*sorted_data_two)
+x3, y3, gauss3 = zip(*sorted_data_three)
+
+gauss1 = np.asarray(gauss1)
+gauss2 = np.asarray(gauss2)
+gauss3 = np.asarray(gauss3)
+
+x1 = []
+y1 = []
+for index, element in enumerate(x_1):
+    print(element)
+    x1.append(element + abs(min(x_1)))
+
+for index, element in enumerate(y_1):
+    y1.append(element + abs(min(y_1)))
+
+# Redoing it my way
+
+one_array = np.empty([int(max(x1)), int(max(y1))])
+one_array[:] = np.NAN
+print(one_array)
+print(y1)
+print(x1)
+for element in sorted_data_one:
+    one_array[int(element[0]), int(element[1])] = element[2]
+x_list = []
+y_list = []
+for index in range(0,int(max(x1))):
+    x_list.append(index)
+for index in range(0,int(max(y1))):
+    y_list.append(index)
+
+print(interpolate.RectBivariateSpline(x_list, y_list, one_array))
