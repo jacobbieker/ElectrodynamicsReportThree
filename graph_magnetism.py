@@ -135,28 +135,31 @@ gauss3 = np.asarray(gauss3)
 x1 = []
 y1 = []
 for index, element in enumerate(x_1):
-    print(element)
     x1.append(element + abs(min(x_1)))
 
 for index, element in enumerate(y_1):
     y1.append(element + abs(min(y_1)))
 
+#sorted_data_one = zip(x_1,y_1,gauss1)
 # Redoing it my way
-
-one_array = np.empty([int(max(x1)), int(max(y1))])
-one_array[:] = np.NAN
-print(one_array)
-print(y1)
-print(x1)
-for element in sorted_data_one:
-    one_array[int(element[0]), int(element[1])] = element[2]
-    print(one_array[int(element[0])])
 x_list = []
 y_list = []
-for index in range(0,int(max(x1))):
+for index in range(0,int(max(x1))+1):
     x_list.append(index)
-for index in range(0,int(max(y1))):
+for index in range(0,int(max(y1))+1):
     y_list.append(index)
+
+one_array = np.empty([int(max(x1))+1, int(max(y1))+1])
+one_array[:] = np.NAN
+#print(sorted_data_one)
+for index, element in enumerate(sorted_data_one):
+    one_coor = element[0]
+    two_coor = element[1]
+    one_coor += abs(min(x_1))
+    two_coor += abs(min(y_1))
+    #print(one_array.shape[1])
+    #print(len(sorted_data_one))
+    one_array[int(one_coor), int(two_coor)] = element[2]
 
 x1_spline = interpolate.RectBivariateSpline(x_list, y_list, one_array)
 print(one_array)
@@ -164,7 +167,7 @@ print(one_array)
 x2 = []
 y2 = []
 for index, element in enumerate(x_2):
-    print(element)
+    #print(element)
     x2.append(element + abs(min(x_2)))
 
 for index, element in enumerate(y_2):
@@ -172,30 +175,37 @@ for index, element in enumerate(y_2):
 
 # Redoing it my way
 
-two_array = np.empty([int(max(x2)), int(max(y2))])
-two_array[:] = np.NAN
-print(two_array)
-print(y2)
-print(x2)
-for element in sorted_data_two:
-    two_array[int(element[0]), int(element[1])] = element[2]
 x_list2 = []
 y_list2 = []
-for index in range(0,int(max(x2))):
+for index in range(0,int(max(x2))+1):
     x_list2.append(index)
-for index in range(0,int(max(y2))):
+for index in range(0,int(max(y2))+1):
     y_list2.append(index)
+
+two_array = np.empty([int(max(x2))+1, int(max(y2))+1])
+two_array[:] = np.NAN
+#print(two_array)
+#print(y2)
+#print(x2)
+for index, element in enumerate(sorted_data_two):
+    one_coor = element[0]
+    two_coor = element[1]
+    one_coor += abs(min(x_2))
+    two_coor += abs(min(y_2))
+    #print(one_array.shape[1])
+    #print(len(sorted_data_one))
+    two_array[int(one_coor), int(two_coor)] = element[2]
 
 x2_spline = interpolate.RectBivariateSpline(x_list2, y_list2, two_array)
 
 
-print(x1_spline.integral(0.,max(x1),0.,max(y1)))
+#print(x1_spline.integral(0.,max(x1),0.,max(y1)))
 
-print(x2_spline.integral(0.,max(x2),0.,max(y2)))
+#print(x2_spline.integral(0.,max(x2),0.,max(y2)))
 
-print(x1_spline(x_list, y_list))
+#print(x1_spline(x_list, y_list))
 
-print(x1_spline.get_coeffs())
+#print(x1_spline.get_coeffs())
 
 #mask invalid values
 array = np.ma.masked_invalid(one_array)
@@ -208,8 +218,11 @@ newarr = array[~array.mask]
 GD1 = interpolate.griddata((x1, y1), newarr.ravel(),
                           (xx, yy),
                              method='cubic')
-print(GD1)
+#print(GD1)
 plt.imshow(GD1,interpolation='nearest')
+plt.title("Part A: 4mm thick gap")
+plt.xlabel("X position (mm)")
+plt.ylabel("Y position (mm)")
 plt.show()
 
 #mask invalid values
@@ -223,8 +236,11 @@ newarr = array[~array.mask]
 GD2 = interpolate.griddata((x1, y1), newarr.ravel(),
                           (xx, yy),
                              method='cubic')
-print(GD2)
+#print(GD2)
 plt.imshow(GD2,interpolation='nearest')
+plt.title("Part B: 4mm thick gap")
+plt.xlabel("X position (mm)")
+plt.ylabel("Y position (mm)")
 plt.show()
 
 total_b = np.nansum(GD2)
