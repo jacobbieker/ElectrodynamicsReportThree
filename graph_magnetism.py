@@ -286,7 +286,7 @@ data_part_two_hm = [hm_partb_two, hm_partb_one]
 
 fit = np.polyfit(data_part_two_bm, data_part_two_hm, 1)
 print(fit)
-fit_x = np.arange(0, 200000, 1000)
+fit_x = np.arange(0, 200000, 100)
 plt.plot(data_part_two_bm, data_part_two_hm)
 plt.plot(fit_x, fit_x*fit[0] + fit[1])
 plt.xlabel("B(m) Telsa")
@@ -294,3 +294,15 @@ plt.ylabel("H(m) Tesla")
 plt.title("B(m) vs H(m) for Different Gaps")
 plt.show()
 
+# Get value for when B_m is zero
+y_values = np.empty(shape=1)
+for element in fit_x:
+    np.append(y_values, (fit_x*fit[0] + fit[1]))
+
+
+def find_nearest(array,value):
+    idx = (np.abs(array-value)).argmin()
+    return array[idx]
+
+
+print(find_nearest(y_values, 0))

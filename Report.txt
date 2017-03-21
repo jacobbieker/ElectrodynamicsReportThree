@@ -66,11 +66,14 @@ Analysis:
     On the other hand, when calculating the fluxes, two widely different results occured. When the total flux was calculated by adding up the data points times the size of each square,
     the field of Configuration A was larger by 29.44%, but when more data points were extrapolated from the recorded data, the results flipped, and the flux from Configuration B was larger by
     37.19%.
-    The second part was inconclusive. With only two different gap sizes, the fitted line is always going to be straight, although it does generally match with
-    predictions for a constant magnetization, there was not enough data points for a true comparision.
+    The second part was inconclusive. With only two different gap sizes, 4mm and 2mm, the fitted line is always going to be straight, although it does generally match with
+    predictions for a constant magnetization, there was not enough data points for a true comparision. From the limited data we do have, the value for the the coercitive field {H_m}
+    is -6.728 Telsa. The remanent field {B_r} is roughly 168,451 Tesla. 
 Discussion:
     What do the results and analysis tell you about the validity of your model?
-    The results and analysis tell me that the model is generally valid. For the first part, where we had a significant amount of data points, the fluxes do generally match.
+    The results and analysis tell me that the model is generally valid. The model predicts a larger magnetic field for Configuration B, which was the case, although
+    our measurements for the fluxes did not match the model. On one hand, the effect of extrapolating data points seemed to reverse which field had more flux, so the issue seems to be
+    with the amount of actual data points collected.
     For the second part though, the model seems to be right, but there are only two data points, not enough to be sure about that.
 
     What error source is dominant?
