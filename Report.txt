@@ -26,7 +26,7 @@ Theory:
     What laws are relevant?
     Ampere's Law, Maxwell Equations, Ohm's Law
     What does your model predict?
-    Theoretical model predicts strong fall of for Part A, extended for Part B,
+    Theoretical model predicts strong fall off for Part A, extended for Part B,
     Point is models have hard time with this leaking flux, so no good ones
     What assumptions does your model make?
     Assumes B_m = B_k = B_j = B_g and u_k roughly = u_g roughly = u_0
@@ -62,9 +62,12 @@ Analysis:
     The data was processed in Python 3.6 using the Numpy and Matplotlib libraries. Numpy was used to generate the heatmaps, interpolate data points, and
     integrate, while matplotlib was used to plot the data.
     What are the results of your fits?
-    The results from the first part generally fit the expected results, with the magnetic fields having very similar fluxes, but very different sizes.
+    The results from the first somewhat fit the expected results. The magnetic field of Configuration A did have a much smaller extension than the field of Configuration B.
+    On the other hand, when calculating the fluxes, two widely different results occured. When the total flux was calculated by adding up the data points times the size of each square,
+    the field of Configuration A was larger by 29.44%, but when more data points were extrapolated from the recorded data, the results flipped, and the flux from Configuration B was larger by
+    37.19%.
     The second part was inconclusive. With only two different gap sizes, the fitted line is always going to be straight, although it does generally match with
-    predictions, there was not enough data points for a true comparision.
+    predictions for a constant magnetization, there was not enough data points for a true comparision.
 Discussion:
     What do the results and analysis tell you about the validity of your model?
     The results and analysis tell me that the model is generally valid. For the first part, where we had a significant amount of data points, the fluxes do generally match.
@@ -72,7 +75,9 @@ Discussion:
 
     What error source is dominant?
     For part one, the dominant error source is the readings from the Tesla-meter. The readings varied, sometimes significantly, even when the meter was not being moved. We did not
-    have time to give a complete range on the data points, instead we took the value seemed to be the middle of the displayed values, but there could have been error in that.
+    have time to give a complete range on the data points, instead we took the value seemed to be the middle of the displayed values, but there could have been error in that. In
+    addition, because of time constraints, we did not have time to measure the complete magnetic field of the different configurations. We measured the majority of the field, but, for
+    example, with Configuration B, we had to resort to extrapolating some data points from the grid of data points we could finish in the allocated time.
 
     For the second part, the dominant error is how few gap sizes we used. We did choose to half the gap size, so there should be a visible effect from that, but again, the lack of
     multiple data points makes it impossible to say there is any significance in the results we have for that part.

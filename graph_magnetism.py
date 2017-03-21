@@ -111,12 +111,14 @@ def B_m(hm):
 total_a = 0
 for value in data_set_one:
     total_a += value[2]*25 #mm^2
-print(total_a)
+print("Total A:" + str(total_a))
 # B is 10x10mm, so 100mm^2
 total_b = 0
 for value in data_set_two:
     total_b += value[2]*100 #mm^2
 print(total_b)
+
+print("Difference: " + str((abs(total_a-total_b))/(total_a+total_b)))
 
 from scipy import interpolate
 
@@ -243,11 +245,12 @@ plt.xlabel("X position (mm)")
 plt.ylabel("Y position (mm)")
 plt.show()
 
-total_b = np.nansum(GD2)
-total_a = np.nansum(GD1)
+total_b = np.nansum(GD2)*100
+total_a = np.nansum(GD1)*25
 
-print(total_a)
+print("Total A: " + str(total_a))
 print(total_b)
+print("Difference: " + str((abs(total_a-total_b))/(total_a+total_b)))
 
 # Part 2: Get the flux inside the gab, so only within the area of the gab roughly [0,30] on both sides
 
