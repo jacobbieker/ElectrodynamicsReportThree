@@ -96,15 +96,15 @@ plt.show()
 
 # Getting B(m)
 u0 = 4.*np.pi*(10**(-7))
-l_m = 25.*2
-l_g = 4.
-l_k = 1.*4
+lm = 25.*2
+lg = 4.
+lk = 1.*4
 
-def B_m(lg,lm,lk,hm):
+def B_m(hm):
     # Gets B(m) from measured values?
     top = -1*lm*hm*u0
-    bottom = lg*lk
-    return top/bottom
+    bottom = lg+lk
+    return bottom/top
 
 # Integration though doing flux * area from the measurements
 # Part A first, each value corresponds to a 5x5mm section. So no interpolation at the moment, might try later
@@ -248,3 +248,46 @@ total_a = np.nansum(GD1)
 
 print(total_a)
 print(total_b)
+
+# Part 2: Get the flux inside the gab, so only within the area of the gab roughly [0,30] on both sides
+
+x21, y21, gauss21 = zip(*sorted_data_two)
+x3, y3, gauss3 = zip(*sorted_data_three)
+
+# Get only data inside the gab
+partb_one = []
+for index, element in enumerate(x21):
+    if 0.0 <= element <= 30.0 and 0.0 <= y21[index] <= 30.0:
+        partb_one.append(gauss21[index])
+
+partb_two = []
+for index, element in enumerate(x3):
+    if 0.0 <= element <= 30.0 and 0.0 <= y3[index] <= 30.0:
+        partb_two.append(gauss3[index])
+
+total_partb_one = np.sum(partb_one)
+total_partb_two = np.sum(partb_two)
+
+print(total_partb_one)
+print(total_partb_two)
+
+# H(m), using B_m reveresed for this
+print(B_m(total_partb_one))
+print(B_m(total_partb_two))
+
+hm_partb_one = B_m(total_partb_one)
+hm_partb_two = B_m(total_partb_two)
+
+data_part_two_bm = [total_partb_two, total_partb_one]
+data_part_two_hm = [hm_partb_two, hm_partb_one]
+
+fit = np.polyfit(data_part_two_bm, data_part_two_hm, 1)
+print(fit)
+fit_x = np.arange(0, 200000, 1000)
+plt.plot(data_part_two_bm, data_part_two_hm)
+plt.plot(fit_x, fit_x*fit[0] + fit[1])
+plt.xlabel("B(m) Telsa")
+plt.ylabel("H(m) Tesla")
+plt.title("B(m) vs H(m) for Different Gaps")
+plt.show()
+
