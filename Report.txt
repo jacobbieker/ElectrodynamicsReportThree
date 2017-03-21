@@ -1,0 +1,78 @@
+In the report, we will start by going over the theory behind magnetic circuits.
+First we will look at the case of introducing a gap in the magnetic circuit in two different places, one inbetween two permanent magnets, and one in the middle of an iron yoke.
+Following that, we will then look at how a gap
+
+
+
+
+Theory
+
+Magnetic Circuits
+
+The basic idea is that strong permanent magnets create a flux that goes through
+a ferromagnetic material, similar to how an electric field can flow through a conductive material.
+The analogy continues from Maxwell's equations, represented by Ampere's Law {\grad vector x H_vector = 0}
+and {\grad_vector \dot B_vector = 0}.
+
+\ INCLUDE PICTURE OF EXPERIMENTAL SETUP
+
+From Ampere's Law, when there are no free currents, as is the case in this experiment,
+
+Theory:
+    What is the abstract physical problem?
+    Already Written
+    What are the relevant physical quantities?
+    Tesla, mm
+    What laws are relevant?
+    Ampere's Law, Maxwell Equations, Ohm's Law
+    What does your model predict?
+    Theoretical model predicts strong fall of for Part A, extended for Part B,
+    Point is models have hard time with this leaking flux, so no good ones
+    What assumptions does your model make?
+    Assumes B_m = B_k = B_j = B_g and u_k roughly = u_g roughly = u_0
+    Part 2 change in flux from different sizes:
+    Assume B_m = B_g and H_m = -(I_g + I_k)/(u_0*l_m)B_m
+
+Setup:
+    What does your experiment implementation of the physical problem look like?
+    Take picture from notes,
+    What is your principle of measurement?
+    Tesla-meter, gives tesla of it, and using mm sheet for measurement
+    What are the dimension/parameter values of your setup? Reuse symbols of the theory section.
+    Values are in tesla, and mm
+    How accurately do you know the relevant parameters? (Error sources)
+    For mm, we used a sheet of graphing paper with mm marks, and did not move the paper as we did the experiment. Therefore,
+    our mm values should be fairly accurate.
+    For the tesla values, we used a calibrated tesla-meter, but the readings usually did not stay on one value for a given position,
+    instead, the tesla-meter varies its value, sometimes significantly, and the single value we take from each spot is what the average seems to be,
+    but is not necessarily the true value.
+
+Method:
+    What are the steps you take to collect your data?
+    The steps taken to measure the field were as follows. First, starting by looking top down in the top-left corner
+    That is the origin in the graph. From there, for measuring the field when the gap was inbetween the permanent magnets,
+    keep the tesla-meter level, and move in 5mm increments in a grid pattern. Stop taking measurements when the value of the
+    tesla-meter reads 10 or below. In the part where the gap is between parts of the iron yoke, take measurements in 10mm increments.
+    Once one half of the grid is done, spin the plastic seperator around, and repeat.
+Results:
+    Show your raw data. If this would be many very similar plots, just show one good example.
+    SHOW THE HEATMAPS FOR THE DATA COLLECTION
+Analysis:
+    How do you process your data?
+    The data was processed in Python 3.6 using the Numpy and Matplotlib libraries. Numpy was used to generate the heatmaps, interpolate data points, and
+    integrate, while matplotlib was used to plot the data.
+    What are the results of your fits?
+    The results from the first part generally fit the expected results, with the magnetic fields having very similar fluxes, but very different sizes.
+    The second part was inconclusive. With only two different gap sizes, the fitted line is always going to be straight, although it does generally match with
+    predictions, there was not enough data points for a true comparision.
+Discussion:
+    What do the results and analysis tell you about the validity of your model?
+    The results and analysis tell me that the model is generally valid. For the first part, where we had a significant amount of data points, the fluxes do generally match.
+    For the second part though, the model seems to be right, but there are only two data points, not enough to be sure about that.
+
+    What error source is dominant?
+    For part one, the dominant error source is the readings from the Tesla-meter. The readings varied, sometimes significantly, even when the meter was not being moved. We did not
+    have time to give a complete range on the data points, instead we took the value seemed to be the middle of the displayed values, but there could have been error in that.
+
+    For the second part, the dominant error is how few gap sizes we used. We did choose to half the gap size, so there should be a visible effect from that, but again, the lack of
+    multiple data points makes it impossible to say there is any significance in the results we have for that part.
